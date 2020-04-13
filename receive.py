@@ -92,7 +92,7 @@ class Bomb:
                 command = commands["command"]
                 if command == "defuse":
                     self.defused = True
-
+                    self.terminate()
                     print("Bomb defused")
                 elif command == "arm":
                     self.activate()
