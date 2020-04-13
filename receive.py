@@ -13,6 +13,7 @@ class Bomb:
         self.requestThread = None
         self.sensorThread = None
         self.keypadThread = None
+        self.defused = False
         self.timer = 0
         self.modifier = 1
 
@@ -44,12 +45,13 @@ class Bomb:
         self.timer = t
         while self.timer and self._ticking:
             mins, secs = divmod(self.timer, 60)
-            timeformat = f'{mins}:{secs}'
+            timeformat = '{}:{}'.format(mins, secs)
             print(timeformat)
             time.sleep(1 / self.modifier)
             self.timer -= 1
             self.beepSound()
-        self.detonate()
+        if not self.defused:
+            self.detonate()
 
     def activate(self):
         self.activateCounter()
@@ -89,7 +91,8 @@ class Bomb:
             if 'k3y' in commands and commands['k3y'] == "valhalaa":
                 command = commands["command"]
                 if command == "defuse":
-                    self.terminate()
+                    self.defused = True
+
                     print("Bomb defused")
                 elif command == "arm":
                     self.activate()

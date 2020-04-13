@@ -27,5 +27,5 @@ local_mac = [int("{0:012x}".format(get_mac())[i:i + 2], 16) for i in range(0, 12
 print("Commands:\n'defuse' - to defuse the bomb\n'arm' - to activate it")
 while True:
     command = input("Enter command: ")
-    send_commands(laptop, {'k3y': "valhalaa", "command": f"{command}"})
+    send_commands(broadcast, {'k3y': "valhalaa", "command": f"{command}"})
     print("Sent commands successfully!")
